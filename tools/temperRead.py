@@ -11,7 +11,7 @@ except Exception, e:
 
 temp = re.search('(\d{2}\.\d{2})C', text).groups()
 
-conn = pymysql.connect(user='minxy', passwd='umpalumpa', db='Minxy')
+conn = pymysql.connect(user='minxy', passwd='umpalumpa', db='Minxy', host='192.168.178.50')
 cur = conn.cursor()
 cur.execute('insert into flatcontrol_tempsensor (time, temp) values (now(), %s)' % (temp))
 conn.commit()
