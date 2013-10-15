@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+import re
+import subprocess
+import sys
+import pymysql
+
+try:
+    text = subprocess.check_output('pcsensor')
+except Exception, e:
+    sys.exit(1)
+
+temp = re.search('(\d{2}\.\d{2})C', text).groups()
+
+conn = pymysql.connect(user='minxy', passwd='umpalumpa', db='Minxy')
+cur = conn.cursor()
+cur.execute('insert into flatcontrol_tempsensor (time, temp) values (now(), %s)' % (temp))
+conn.commit()
+conn.close()
