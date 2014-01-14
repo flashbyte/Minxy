@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# TODO: Move to django command
 import re
 import subprocess
 import sys
